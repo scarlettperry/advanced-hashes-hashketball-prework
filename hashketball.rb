@@ -176,26 +176,22 @@ game_hash.each do |location, team_data|
 end
 
 def player_numbers (team)
-  new_hash = {}
+  team_numbers = []
   game_hash.each do |location, team_data|
     team_data.each do |attribute, data|
       if data == team
-        new_hash = team_data[:players]
+        team_data[:players].each do |player, stats|
+          stats.each do |list, value|
+            if list == :number
+              team_numbers.push(value)
+            end
+          end
+        end
       end
     end
   end
-  new_hash
-
-new_array = []
-  new_hash.each do |player, stats|
-    stats.each do |int, value|
-      if int == :number
-        new_array.push(value)
-      end
-    end
-  end
-  new_array
-end 
+team_numbers
+end
 
 def player_stats (name)
 new_hash = {}
